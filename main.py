@@ -1,5 +1,6 @@
 from functools import partial
 from random import choices, randint, randrange, random
+import time
 from typing import List, Optional, Callable, Tuple
 from collections import namedtuple
 
@@ -22,7 +23,7 @@ things = [
     Thing('Water Bottle', 30, 192),
 ]
 
-second_things = [
+more_things = [
     Thing('Mints', 5, 25),
     Thing('Socks', 10, 38),
     Thing('Tissues', 15, 80),
@@ -127,17 +128,21 @@ def genome_to_things(gnome:Genome, things:[Thing]) -> [Thing]:
             
     return result
 
+start = time.time()
 population, generations = run_evolution(
+    
     populate_func=partial(
-        generate_population, size=10, geneme_length=len(things)
+        generate_population, size=10, geneme_length=len(more_things)
     ),
     fitness_func=partial(
-        fitness, things=things, weight_limit=3000
+        fitness, things=more_things, weight_limit=3000
     ),
-    fitness_limit=740,
+    fitness_limit=1310,
     generation_limit=100
 )
+end = time.time()
 
 print(f"number of generations: {generations}")
-print(f"best solution: {genome_to_things(population[0], things)}")
+print(f"time: {end - start}s")
+print(f"best solution: {genome_to_things(population[0], more_things)}")
     
