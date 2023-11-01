@@ -132,17 +132,17 @@ start = time.time()
 population, generations = run_evolution(
     
     populate_func=partial(
-        generate_population, size=10, geneme_length=len(more_things)
+        generate_population, size=10, geneme_length=len(things)
     ),
     fitness_func=partial(
-        fitness, things=more_things, weight_limit=3000
+        fitness, things=things, weight_limit=3000
     ),
-    fitness_limit=1310,
+    fitness_limit=740,
     generation_limit=100
 )
 end = time.time()
 
 print(f"number of generations: {generations}")
 print(f"time: {end - start}s")
-print(f"best solution: {genome_to_things(population[0], more_things)}")
+print(f"best solution: {genome_to_things(population[0], things)}")
     
